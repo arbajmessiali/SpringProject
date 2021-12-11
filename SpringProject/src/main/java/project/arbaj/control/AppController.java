@@ -1,12 +1,11 @@
 package project.arbaj.control;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(path ="/project")
+@RequestMapping(path ="/")
 public class AppController {
 	
 	@RequestMapping("/index")
