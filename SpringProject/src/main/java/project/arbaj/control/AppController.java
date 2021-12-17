@@ -13,4 +13,19 @@ public class AppController
 	{
 		return "test";
 	}
+	
+	@RequestMapping(path = "/update" , method = RequestMethod.POST)
+	public String update(Password pw)
+	{
+		String status="";
+		User u = new User("arbaj", "ali");
+		if(pw.oldpassword == u.getPassword())
+		{
+			u.setPassword(pw.newpassword);
+			status = "password changed";
+		}
+		else
+			status = "password not correct";
+		return status;
+	}
 }
