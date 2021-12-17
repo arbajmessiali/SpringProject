@@ -1,5 +1,6 @@
 package project.arbaj.control;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,17 +16,21 @@ public class AppController
 	}
 	
 	@RequestMapping(path = "/update" , method = RequestMethod.POST)
-	public String update(Password pw)
+	public String update(@RequestBody Password pw)
 	{
 		String status="";
-		User u = new User("arbaj", "ali");
-		if(pw.oldpassword == u.getPassword())
+		String password = "ali";
+		if(pw.getOldpassword().equalsIgnoreCase(password))
 		{
-			u.setPassword(pw.newpassword);
+			password = pw.getNewpassword();
 			status = "password changed";
+			System.out.println("correct");
 		}
 		else
+		{
 			status = "password not correct";
+			System.out.println("false");
+		}
 		return status;
 	}
 }
