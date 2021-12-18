@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
+@RequestMapping(path = "/UserManagement")
 public class AppController {
 	
-	@RequestMapping(path = "/update", method = RequestMethod.POST)
+	@RequestMapping(path = "/ChangePassword", method = RequestMethod.POST)
 	public String update(@RequestBody Password pw) {
 		String status = "";
-		String password = "ali";
+		String password = "Arbaj@1234";
 		String check = pw.getNewpassword();
 		PasswordAuth auth = new PasswordAuth();
-		if (pw.getOldpassword().equalsIgnoreCase(password)) {
+		if (pw.getOldpassword().equals(password)) {
 			if(auth.companyCheck(check))
 			{
 				status = "password changed";
