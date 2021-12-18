@@ -8,11 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 public class AppController {
-	@RequestMapping(path = "/test", method = RequestMethod.GET)
-	public String test() {
-		return "test";
-	}
-
+	
 	@RequestMapping(path = "/update", method = RequestMethod.POST)
 	public String update(@RequestBody Password pw) {
 		String status = "";
@@ -29,36 +25,26 @@ public class AppController {
 					if(auth.capsCheck(check))
 					{
 						status = "password changed";
+						if(auth.specialCheck(check))
+						{
+							status = "password changed" + "\n";
+							password = check;
+							status = status + "new password = " + password;
+						}
+						else
+							status = "your password must include a special character";
 					}
 					else
-					{
 						status = "your password must include a capital letter";
-					}
 				}
 				else
-				{
 					status = "use a longer password";
-				}
 			}
 			else
-			{
 				status = "do not use company name";
-			}
-			/*if (pw.getNewpassword().equalsIgnoreCase("cognizant")) {
-				status = "do not use company name";
-				System.out.println("false");
-			} else {
-				password = pw.getNewpassword();
-				status = "password changed";
-				System.out.println("correct");
-			}
-			*/
-			System.out.println("new password = " + password);
 		}
 		else
-		{
 			status = "incorrect password";
-		}
 		return status;
 	}
 
